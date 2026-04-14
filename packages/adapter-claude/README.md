@@ -9,7 +9,14 @@ Three integration layers:
 
 ## Quick Start
 
-### 1. Add MCP server to Claude Code
+### 1. Install and initialize DKG node (first time only)
+
+```bash
+npm install -g @origintrail-official/dkg
+dkg init    # Interactive: choose chain, create wallet, set node name
+```
+
+### 2. Add MCP server to Claude Code
 
 In `~/.claude/settings.json`:
 
@@ -24,13 +31,13 @@ In `~/.claude/settings.json`:
 }
 ```
 
-### 2. Start DKG daemon
+### 3. Start DKG daemon
 
 ```bash
 dkg start
 ```
 
-### 3. Open Claude Code
+### 4. Open Claude Code
 
 12 DKG tools appear automatically. Try: "Use dkg_status to check the node"
 

@@ -22,7 +22,14 @@ DKG Working Memory is the **primary store** for all persistent knowledge (facts,
 
 ## Quick Start
 
-### 1. Install the Hermes plugin
+### 1. Install and initialize DKG node (first time only)
+
+```bash
+npm install -g @origintrail-official/dkg
+dkg init    # Interactive: choose chain, create wallet, set node name
+```
+
+### 2. Install the Hermes plugin
 
 ```bash
 cd packages/adapter-hermes
@@ -31,7 +38,7 @@ cd packages/adapter-hermes
 
 This creates a symlink from Hermes's plugin directory to `hermes-plugin/`. If Hermes is in a standard location, the path is auto-detected.
 
-### 2. Configure Hermes
+### 3. Configure Hermes
 
 ```bash
 hermes memory setup
@@ -44,7 +51,7 @@ memory:
   provider: dkg
 ```
 
-### 3. Start DKG + Hermes
+### 4. Start DKG + Hermes
 
 ```bash
 dkg start          # Start the DKG daemon
