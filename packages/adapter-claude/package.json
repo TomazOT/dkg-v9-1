@@ -1,0 +1,39 @@
+{
+  "name": "@origintrail-official/dkg-adapter-claude",
+  "version": "0.0.1",
+  "description": "Claude Code adapter — connects Claude to DKG V10 with MCP tools + lifecycle hooks + CLAUDE.md context injection",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "dkg-claude-mcp": "./dist/index.js",
+    "dkg-claude-sync": "./dist/sync-context.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --passWithNoTests",
+    "clean": "rm -rf dist tsconfig.tsbuildinfo"
+  },
+  "dependencies": {
+    "@origintrail-official/dkg-core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1",
+    "zod": "^3.25"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.18"
+  },
+  "files": [
+    "dist",
+    "scripts",
+    "hooks.json",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OriginTrail/dkg-v9.git",
+    "directory": "packages/adapter-claude"
+  }
+}

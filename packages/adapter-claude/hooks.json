@@ -1,0 +1,40 @@
+{
+  "description": "DKG V10 memory integration hooks for Claude Code",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx --yes @origintrail-official/dkg-adapter-claude dkg-claude-sync 2>/dev/null || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx --yes @origintrail-official/dkg-adapter-claude dkg-claude-sync --observation \"$CLAUDE_TOOL_RESULT\" 2>/dev/null || true",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx --yes @origintrail-official/dkg-adapter-claude dkg-claude-sync 2>/dev/null || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
