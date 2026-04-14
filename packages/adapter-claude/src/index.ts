@@ -99,7 +99,7 @@ server.tool(
       const client = getClient();
       const result = await client.post('/api/query', {
         sparql: args.sparql,
-        contextGraphId: args.context_graph ?? DEFAULT_CG || undefined,
+        contextGraphId: (args.context_graph ?? DEFAULT_CG) || undefined,
         includeSharedMemory: args.include_shared_memory,
       });
       return ok(JSON.stringify(result, null, 2));
