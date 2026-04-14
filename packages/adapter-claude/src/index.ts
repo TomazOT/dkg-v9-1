@@ -120,9 +120,15 @@ server.tool(
   async (args) => {
     try {
       const client = getClient();
+      const agentName = process.env.DKG_AGENT_NAME ?? 'claude';
+      const quads = [{
+        subject: `urn:hermes:${agentName}:shared`,
+        predicate: 'urn:hermes:sharedContent',
+        object: args.content,
+      }];
       const result = await client.post('/api/shared-memory/write', {
         contextGraphId: args.context_graph ?? DEFAULT_CG,
-        content: args.content,
+        quads,
       });
       return ok(JSON.stringify(result, null, 2));
     } catch (e) { return err(String(e)); }
@@ -272,7 +278,9 @@ server.tool(
   },
   async (args) => {
     try {
-      const id = args.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      const slug = args.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+      const rand = Math.floor(Math.random() * 0xFFFF);
+      const id = `cg:${slug}-${Math.floor(Date.now() / 1000).toString(16)}${rand.toString(16).padStart(4, '0')}`;
       const result = await getClient().post('/api/context-graph/create', {
         id,
         name: args.name,
